@@ -1,18 +1,18 @@
 'use strict';
 
-// const fetchJsonFile = await fetch("./api.json")
+const fetchJsonFile = await fetch("./api.json")
 
-// const DID_API = await fetchJsonFile.json()
+const DID_API = await fetchJsonFile.json()
 
-// const fetchApiKey = await fetch("./config.json");
-// const apiKey = await fetchApiKey.json();
+const fetchApiKey = await fetch("./config.json");
+const apiKey = await fetchApiKey.json();
 
-const DID_API = process.env.DID_API_KEY;
+
 
 import { GoogleGenerativeAI } from 'https://cdn.skypack.dev/@google/generative-ai';
 
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = apiKey.API_KEY;
 const getGeminiResponse = async (prompt) => {
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
