@@ -98,6 +98,7 @@
       }
 
       #content {
+        
         width: 820px;
         position: relative;
         margin: 0 auto;
@@ -114,7 +115,7 @@
         border-radius: 5px;
         border: none;
         font-size: 16px;
-        margin: 0 5px;
+        margin: 20px 5px;
         background-color: #7459fe;
         color: #fff;
       }
@@ -161,6 +162,12 @@
         border-radius: 50%;
         background-color: #fff;
       }
+      #text-block{
+        text-align: left;
+        line-height: 140%;
+        font-size: 15px;
+        display: inline-block;
+      }
     </style>
   </head>
 
@@ -168,11 +175,17 @@
     <!-- adde "id=content" -->
     <div id="content">
       <!-- added "id=video-wrapper" -->
+
       <div id="video-wrapper">
         <div>
           <video id="idle-video-element" width="400" height="400" autoplay loop style="opacity: 1"></video>
           <video id="stream-video-element" width="400" height="400" autoplay style="opacity: 0"></video>
         </div>
+      </div>
+      <div id="text-block">
+        1.Click on connect <br>
+        2. After successfully connecting, click on Start Listening button and start speaking<br>
+        3. you will be hearing response within few seconds
       </div>
       <br />
 
