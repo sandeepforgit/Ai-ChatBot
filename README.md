@@ -10,7 +10,7 @@
 * (open the app) In the browser add localhost:3000
 * (connect) press connect you should see the connection ready 
 * (stream) Press the start button to start streaming
-<img src="./app.png" alt="Streaming App" width="200"/>
+<img src="./app.png" alt="Streaming App" width="800"/>
 
 ## ⭐ Start Agents Demo [NEW!] ⭐
 * (bring up the app) in the folder (ctr left click on folder through finder) open the terminal `run node app.js` 
