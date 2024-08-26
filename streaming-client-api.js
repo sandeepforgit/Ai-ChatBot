@@ -1,21 +1,29 @@
 'use strict';
 
+//fetching Di-D api key
 const fetchJsonFile = await fetch("./api.json")
-
 const DID_API = await fetchJsonFile.json()
 
+// fetching gemini api key
 const fetchApiKey = await fetch("./config.json");
 const apiKey = await fetchApiKey.json();
-
+const API_KEY = apiKey.API_KEY;
 
 
 import { GoogleGenerativeAI } from 'https://cdn.skypack.dev/@google/generative-ai';
 
 
-const API_KEY = apiKey.API_KEY;
+// getting response from gemini ai
 const getGeminiResponse = async (prompt) => {
   const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    generationConfig: {
+      candidateCount: 1,
+      maxOutputTokens: 40,
+      temperature: 1.0,
+    },
+   });
   const chat = model.startChat({
   history: [
     {
@@ -32,10 +40,10 @@ const getGeminiResponse = async (prompt) => {
   return result.response.text();
 }
 
-const startListening = document.getElementById('start-listening');
-
 
 //listening from the user.
+const startListening = document.getElementById('start-listening');
+
 startListening.onclick = async () => {
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = 'en-US';
@@ -51,7 +59,7 @@ startListening.onclick = async () => {
     //Get the response from Gemini AI
     let geminiResponse = await getGeminiResponse(userVoiceText);
     console.log(geminiResponse);
-    
+
     recognition.onerror = (event) => {
       console.error('Error occurred in recognition:', event.error);
     };
@@ -59,6 +67,8 @@ startListening.onclick = async () => {
     await startPlay(geminiResponse);
   }
 }
+
+
 
 // boilerplate code to setup Di-D live talk stream
 
@@ -180,7 +190,7 @@ const startPlay = async (geminiResponse) => {
             voice_id: 'en-US-JennyNeural'
           },
           ssml: 'false',
-          input: geminiResponse
+          input: geminiResponse  // gemini Response is passed as input
         },
         ...(DID_API.service === 'clips' && {
           background: {
